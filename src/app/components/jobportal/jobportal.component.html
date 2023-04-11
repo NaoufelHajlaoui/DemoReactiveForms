@@ -1,0 +1,83 @@
+<div class="container">
+  <legend>Job portal</legend>
+<div class="row">
+    <div class="col col-md-8" style="overflow-y:scroll ;">
+<form [formGroup]="jobForm" (ngSubmit)="save()">
+    <div class="mb-3">
+        <label for="txtName" class="form-label">first name</label>
+        <input type="text" class="form-control" id="txtName" formControlName="firstName">
+      </div>
+      <div class="mb-3">
+        <label for="txtLastName" class="form-label">last name</label>
+        <input type="text" class="form-control" id="txtLastName"  formControlName="lastName">
+        <div class="mb-3" formGroupName="contacts">
+          <div class="row">
+            <div class="col col-md-4 offset-md-4">
+              <div class="mb-3">
+                <label for="ddlContactType" class="form-label">Contact</label>
+                <select class="form-select" aria-label="Default select example" formControlName="contactType">
+                  <option selected>Open this select menu</option>
+                  <option value="-1">-select-</option>
+                  <option value="email">Email</option>
+                  <option value="3">Phone</option>
+                </select>
+              </div>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-md-6">
+              <div class="mb-3">
+                <label for="txtEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="txtEmail" formControlName="email">
+              </div>
+
+            </div>
+            <div class="col col-md-6">
+              <div class="mb-3">
+                <label for="txtphone" class="form-label">phone</label>
+                <input type="text" class="form-control" id="txtphone" formControlName="phone">
+              </div>
+              
+            </div>
+          </div>
+          
+        </div>
+        <div class="mb-3" formArrayName="skills">
+        <div class="row">
+          <div class="col col-md-4 offset-md-4">
+            <button type="button" class="btn btn-primary" (click)="addSkillsFormGroup()">Add Skills</button>
+          </div>
+        </div>
+        <ng-container *ngFor="let skill of skillsFrom.controls; let i=index">
+          <div class="row" [formGroupName]="i">
+            <div class="col col-md-5">
+              <div class="mb-3">
+                <label [for]="'txtProgrammeLang'+i" class="form-label">programming language</label>
+                <input type="text" class="form-control" [id]="'txtProgrammeLang'+i" formControlName="programLanguage">
+              </div>
+
+            </div>
+            <div class="col col-md-5">
+              <div class="mb-3">
+                <label [for]="'txtExperience'+i" class="form-label">Experience</label>
+                <input type="number" class="form-control" [id]="'txtExperience'+i"  formControlName="experience">
+              </div>
+            </div>
+            <div class="col col-md-2">
+            <button type="button" class="btn btn-danger" (click)="removeSkillsFromGroup(i)">delete</button>
+            </div>
+          </div>
+        </ng-container ></div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <br/>
+      <br/>
+      <button type="button" class="btn btn-primary" (click)="simpleSetValues()">Test SetValue</button>
+</form>
+    </div>
+<div class="col col-md-2" >
+  <div style="position:fixed ;">{{preveiw}}</div>
+</div>
+</div>
+</div>
